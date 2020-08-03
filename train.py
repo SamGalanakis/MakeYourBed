@@ -20,6 +20,24 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 warnings.filterwarnings('ignore')
 
+
+
+
+# args:
+
+seed=123
+num_epochs = 1000
+num_classes = 2
+batch_size = 25
+learning_rate = 0.001
+torch.manual_seed(123)
+torch.cuda.manual_seed(123)
+augment= True
+img_size=224
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+
+
+
 def visualize_dataset(dataset,row=7,vert=6):
     mpl.rcParams['axes.grid'] = False
     mpl.rcParams['image.interpolation'] = 'nearest'
@@ -30,17 +48,10 @@ def visualize_dataset(dataset,row=7,vert=6):
     plt.show()
     
 
-seed=123
-num_epochs = 1000
-num_classes = 2
-batch_size = 25
-learning_rate = 0.001
-torch.manual_seed(123)
-torch.cuda.manual_seed(123)
-augment= True
 
 
-img_size=224
+
+
 made_files = [f for f in listdir(r"data\all_made") if isfile(join(r"data\all_made", f))]
 messy_files = [f for f in listdir(r"data\all_messy") if isfile(join(r"data\all_messy", f))]
 
@@ -127,7 +138,7 @@ visualize_dataset(train_data)
 
 
 
-device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+
 
 
 train_loader = DataLoader(dataset = train_data, batch_size = batch_size, shuffle=True, num_workers=0)
@@ -148,7 +159,7 @@ print(model.original_model_info)
 model=model.to(device)
 
 train_losses = []
-valid_losses = []
+
 with open(f"models//{model_name}//{model_name}_log.txt", "a") as f:
     f.write(f"Epoch,TrainAccuracy,TrainLoss,TestAccuracy\n")
 for epoch in range(1, num_epochs + 1):
@@ -157,7 +168,7 @@ for epoch in range(1, num_epochs + 1):
   
     # keep-track-of-training-and-validation-loss
     train_loss = 0.0
-    valid_loss = 0.0
+
     
     # training-the-model
     model.train()

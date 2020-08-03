@@ -118,7 +118,7 @@ test_data = BedDataset(test, test_transform )
 
 model=CNN()
 model = make_model('resnet101', num_classes=2, pretrained=False)
-checkpoint=torch.load(r"models\model_5\12_model_5.tar")
+checkpoint=torch.load(r"finalModel\12_model_5.tar")
 model.load_state_dict(checkpoint["model_state_dict"])
 model.eval()
 model=model.to(device)

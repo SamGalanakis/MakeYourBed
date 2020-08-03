@@ -41,7 +41,7 @@ def predict_image(model,url,transform):
 
 urllib.request.urlretrieve("https://i.pinimg.com/originals/10/1b/0d/101b0daa8bf7ce15e369153d4d3ddbc9.jpg", "sample.jpg")
 image = img.imread("sample.jpg")
-image = img.imread("IMG_20200803_123405.jpg")
+
 means=np.array([0.485, 0.456, 0.406])
 std=np.array([0.229, 0.224, 0.225])
 img_size=224
@@ -62,7 +62,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 model = make_model('resnet101', num_classes=2, pretrained=False)
 
-checkpoint=torch.load(r"models\model_5\12_model_5.tar")
+checkpoint=torch.load(r"finalModel\12_model_5.tar")
 model.load_state_dict(checkpoint["model_state_dict"])
 model.eval()
 model=model.to(device)
