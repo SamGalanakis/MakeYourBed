@@ -16,7 +16,7 @@ from os.path import isfile, join
 from cnn_finetune import make_model
 from helper import evalOnTest
 
-os.getcwd()
+
 
 seed=123
 
@@ -58,8 +58,7 @@ class BedDataset(Dataset):
             image = self.transform(image)
         return image, label
 
-# means = np.array([0.485, 0.456, 0.406])
-# std = np.array([0.229, 0.224, 0.225])
+
 means=np.array([0.485, 0.456, 0.406])
 std=np.array([0.229, 0.224, 0.225])
 img_size=224
