@@ -39,7 +39,9 @@ Due to the limited computational resources at my disposal I chose to use transfe
 
 
 Without using any image augmentation the model quicly fits to the train data, approaching 100% accuracy within 22 epochs but the test accuracy does not increase past 12 epocks (88% test accuracy) so training past that point seems to start overfitting to the train data.
-![](graphics\base_training.png)
+
+
+![vanilla_training](graphics\base_training.png)
 
 
 
@@ -47,4 +49,4 @@ Without using any image augmentation the model quicly fits to the train data, ap
 
 In order to avoid overfitting and possibly increase generalization I tried to use image augmentation, spepcifically random rotations, flips and [ColorJitter](https://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.ColorJitter). I ran training for significantly longer time and the model did take a while to deal with all the variability in the train set but eventually reached a similar test performance to the previous model so the augmentation does not seem to have helped much. It is likely that the model can not do better than 88% due to the low quality of the dataset and test set despite manual filtering.
 
-![](graphics\augmentet_training.png)
+![augmented_training](graphics\augmentet_training.png)
