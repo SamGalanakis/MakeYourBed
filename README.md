@@ -57,13 +57,15 @@ In order to avoid overfitting and possibly increase generalization I tried to us
 
 As seen from the confusion matrix below the errors seem to be spread fairly evenly between false negatives and positives but through manual inspection this was mostly due to odd pictures in the test set. Futher testing the model on handpicked images showed that while working well in most standard cases the model tends to fail when presented with beds that are unmade but are not messy, so no crumpled duvets etc. This is likely because the images labeled unmade in the dataset are overwhelmingly with crumpled sheets etc. and not just with a folded duvet. Unusual, bold patterns on duvets of made beds also sometimes triggered false negatives, likely due to being mistaken for creases.
 
-                  Unmade | Made |
+|               | Unmade | Made |
 |---------------|--------|------|
 | Actual Unmade | 138    | 16   |
 | Actual Made   | 20     | 133  |
 
 
+
 Example of misclasified pictures:
+
 
 ![unmade_pic](validationSample//unmade-bed-1117-AD-ZORK09-01_sq.jpg)
 
@@ -76,4 +78,4 @@ In order to deal with the main sources of error the data should be supplemented 
 
 
 ## Try it yourself
-After cloning the repo and installing the dependencies from the requirements.txt, download the [model]() and place it in the finalModel directory in the root. Then run classifyPic.py and supply it with an image url. You can also train from scratch by running train.py
+After cloning the repo and installing the dependencies from the requirements.txt, download the [model](https://drive.google.com/file/d/1VrKaAKTFN1yO4CJKpgO6SPO2aZn_xBEB/view?usp=sharing) and place it in the finalModel directory in the root. Then run classifyPic.py and supply it with an image url. You can also train from scratch by running train.py
