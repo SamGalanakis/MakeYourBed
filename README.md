@@ -47,6 +47,33 @@ Without using any image augmentation the model quicly fits to the train data, ap
 
 
 
-In order to avoid overfitting and possibly increase generalization I tried to use image augmentation, spepcifically random rotations, flips and [ColorJitter](https://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.ColorJitter). I ran training for significantly longer time and the model did take a while to deal with all the variability in the train set but eventually reached a similar test performance to the previous model so the augmentation does not seem to have helped much. It is likely that the model can not do better than 88% due to the low quality of the dataset and test set despite manual filtering.
+In order to avoid overfitting and possibly increase generalization I tried to use image augmentation, spepcifically random slight rotations, hotizontal flips and [ColorJitter](https://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.ColorJitter). I ran training for significantly longer time and the model did take a while to deal with all the variability in the train set but eventually reached a similar test performance to the previous model so the augmentation does not seem to have helped much. It is likely that the model can not do better than 88% due to the low quality of the dataset and test set despite manual filtering.
+![augmented_images](graphics//augmented_album.png)
+![augmented_training](graphics//augmented_training.png)
 
-![augmented_training](graphics//augmentet_training.png)
+
+
+## Performance
+
+As seen from the confusion matrix below the errors seem to be spread fairly evenly between false negatives and positives but through manual inspection this was mostly due to odd pictures in the test set. Futher testing the model on handpicked images showed that while working well in most standard cases the model tends to fail when presented with beds that are unmade but are not messy, so no crumpled duvets etc. This is likely because the images labeled unmade in the dataset are overwhelmingly with crumpled sheets etc. and not just with a folded duvet. Unusual, bold patterns on duvets of made beds also sometimes triggered false negatives, likely due to being mistaken for creases.
+
+                  Unmade | Made |
+|---------------|--------|------|
+| Actual Unmade | 138    | 16   |
+| Actual Made   | 20     | 133  |
+
+
+Example of misclasified pictures:
+
+![unmade_pic](validationSample//unmade-bed-1117-AD-ZORK09-01_sq.jpg)
+
+![unmade_pic](validationSample//weird_duvet.jfif)
+
+
+## Possible further improvements
+
+In order to deal with the main sources of error the data should be supplemented with more "inbetween" cases. The problem would also be made much easier by standardizing the angle of the picture to some extent, so no pictures from the side etc although getting such data would be significantly harder.
+
+
+## Try it yourself
+After cloning the repo and installing the dependencies from the requirements.txt, download the [model]() and place it in the finalModel directory in the root. Then run classifyPic.py and supply it with an image url. You can also train from scratch by running train.py

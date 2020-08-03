@@ -40,7 +40,7 @@ def predict_image(model,url,transform):
 
 
 urllib.request.urlretrieve("https://i.pinimg.com/originals/10/1b/0d/101b0daa8bf7ce15e369153d4d3ddbc9.jpg", "sample.jpg")
-image = img.imread("sample.jpg")
+image = img.imread(r"sample.jpg")
 
 means=np.array([0.485, 0.456, 0.406])
 std=np.array([0.229, 0.224, 0.225])

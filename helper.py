@@ -2,19 +2,19 @@ import os
 from os import listdir
 from os.path import isfile, join
 import matplotlib.image as img
-
+from sklearn.metrics import confusion_matrix
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
+import matplotlib.pyplot as plt
 
 
 
 
-
-def evalOnTest(model, device, test_loader):
+def evalOnTest(model, device, test_loader,confusion_mat=True):
     model.eval()
     test_loss = 0
     correct = 0
@@ -25,7 +25,9 @@ def evalOnTest(model, device, test_loader):
             test_loss += F.nll_loss(output, target, reduction='sum').item()  # sum up batch loss
             pred = output.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
             correct += pred.eq(target.view_as(pred)).sum().item()
-
+    if confusion_mat:
+        confusion_mat=confusion_matrix(target.cpu(),pred.cpu())
+        
     test_loss /= len(test_loader.dataset)
     test_accuracy = 100. * (correct / len(test_loader.dataset))
     print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(test_loss, correct, len(test_loader.dataset),test_accuracy))

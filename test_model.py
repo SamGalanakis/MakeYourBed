@@ -18,6 +18,7 @@ from helper import evalOnTest
 
 
 
+
 seed=123
 
 torch.manual_seed(123)
@@ -123,7 +124,7 @@ model.load_state_dict(checkpoint["model_state_dict"])
 model.eval()
 model=model.to(device)
 
-evalOnTest(model,device,test_loader)
+evalOnTest(model,device,test_loader,confusion_mat=True)
 
 for data,target in train_loader:
     data=data.to(device)

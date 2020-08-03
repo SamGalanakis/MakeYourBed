@@ -103,10 +103,8 @@ if augment==True:
     print("Using augmentation!")
     train_transform = transforms.Compose([transforms.ToPILImage(),transforms.Resize(size=(img_size,img_size)),
                                         transforms.RandomHorizontalFlip(0.5),
-                                        transforms.RandomVerticalFlip(0.2),
-                                        transforms.RandomRotation(90),
+                                        transforms.RandomRotation(20),
                                         transforms.ColorJitter(.4,.4,.4),
-                                        transforms.RandomCrop(size=218,pad_if_needed=True),
                                         transforms.ToTensor(),
                                         transforms.Normalize(means,std)])
 
