@@ -51,7 +51,7 @@ def visualize_dataset(dataset,row=7,vert=6):
 
 
 
-
+#load and label files
 made_files = [f for f in listdir(r"data\all_made") if isfile(join(r"data\all_made", f))]
 messy_files = [f for f in listdir(r"data\all_messy") if isfile(join(r"data\all_messy", f))]
 
@@ -84,7 +84,7 @@ class BedDataset(Dataset):
         if self.transform is not None:
             image = self.transform(image)
         return image, label
-
+#define mean, standard deviation for transformation and inverse normalization transform to use for visualization
 means=np.array([0.485, 0.456, 0.406])
 std=np.array([0.229, 0.224, 0.225])
 
@@ -122,6 +122,8 @@ test_transform = transforms.Compose([transforms.ToPILImage(),transforms.Resize(s
                                     transforms.ToTensor(),
                                     transforms.Normalize(means,std)])
 
+
+#split into test and train
 train, test = train_test_split(df, stratify=df.Made, test_size=0.1,random_state=seed)
 
 
@@ -131,6 +133,8 @@ train_data = BedDataset(train,train_transform )
 
 test_data = BedDataset(test, test_transform )
 
+
+#visualize first few pics to make sure transforms are suitable
 visualize_dataset(train_data)
 
 
@@ -146,7 +150,7 @@ test_loader = DataLoader(dataset = test_data, batch_size = batch_size, shuffle=F
 
 
 
-
+#Load pretrained model
 
 model = make_model('resnet101', num_classes=2, pretrained=True)
 model_name= "model_augmented"
@@ -200,7 +204,7 @@ for epoch in range(1, num_epochs + 1):
     accuracy = 100 * correct / len(train_data)
     
   
-   
+    #backup model weights
     torch.save({
     'epoch': epoch,
     'model_state_dict': model.state_dict(),
@@ -209,7 +213,7 @@ for epoch in range(1, num_epochs + 1):
     }, f"models//{model_name}/{epoch}_{model_name}.tar")
     
         
-    
+    #print relevant stats each epoch and log them as csv
     
     print("----------------------------------------------")
     print(f"Epoch {epoch}, train_loss:{train_loss}")

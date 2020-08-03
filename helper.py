@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 
 
 def evalOnTest(model, device, test_loader,confusion_mat=True):
+    """ Evaluate model on provided data loader """
     model.eval()
     test_loss = 0
     correct = 0
@@ -36,6 +37,7 @@ def evalOnTest(model, device, test_loader,confusion_mat=True):
 
 
 def find_grayscale(path):
+    """ Finds and prints all grayscale images in directory"""
     images = [f for f in listdir(rf"{path}") if isfile(join(rf"{path}", f))]
     for img_path in images:
         image = img.imread(path+"//"+img_path)

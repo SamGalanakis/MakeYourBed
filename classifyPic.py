@@ -17,6 +17,7 @@ import urllib
 from cnn_finetune import make_model
 import os
 
+#basic interface to try model
 def predict_image(model,url,transform):
     try:
         urllib.request.urlretrieve(url, "sample.jpg")
@@ -28,6 +29,7 @@ def predict_image(model,url,transform):
     except:
         print("Failed opening file")
         return
+
     inputImage = transform(image)
     prediction = model((inputImage.view((1,)+inputImage.shape)).to(device))
     prediction= F.softmax(prediction,dim=1).detach().cpu().numpy()
@@ -38,10 +40,11 @@ def predict_image(model,url,transform):
     else:
         print(f"The bed isn't made, with probability {np.max(prediction)}")
 
-
+#get image from url, save to file and then load it
 urllib.request.urlretrieve("https://i.pinimg.com/originals/10/1b/0d/101b0daa8bf7ce15e369153d4d3ddbc9.jpg", "sample.jpg")
 image = img.imread(r"sample.jpg")
 
+#make neccesary transforms
 means=np.array([0.485, 0.456, 0.406])
 std=np.array([0.229, 0.224, 0.225])
 img_size=224
@@ -62,6 +65,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 model = make_model('resnet101', num_classes=2, pretrained=False)
 
+#load model and set to eval mode 
 checkpoint=torch.load(r"finalModel\12_model_5.tar")
 model.load_state_dict(checkpoint["model_state_dict"])
 model.eval()
