@@ -37,7 +37,6 @@ Due to the limited computational resources at my disposal, I chose to use transf
 ## Training
 
 
-
 Without using any image augmentation the model quickly fits to the train data, approaching 100% accuracy within 22 epochs but the test accuracy does not increase past 12 epochs (88% test accuracy) so training past that point seems to start overfitting to the train data.
 
 
@@ -78,4 +77,4 @@ In order to deal with the main sources of error, the data should be supplemented
 
 
 ## Try it yourself
-After cloning the repo and installing the dependencies from the requirements.txt, download the [model](https://drive.google.com/file/d/1VrKaAKTFN1yO4CJKpgO6SPO2aZn_xBEB/view?usp=sharing) and place it in the finalModel directory in the root. Then run classifyPic.py and supply it with an image url. You can also train from scratch by running train.py
+After cloning the repo and installing the dependencies from the requirements.txt, download the [model](https://drive.google.com/file/d/1VrKaAKTFN1yO4CJKpgO6SPO2aZn_xBEB/view?usp=sharing) and place it in the finalModel directory in the root. Then run classifyPic.py and supply it with an image url. You can also train from scratch by running train.py.
