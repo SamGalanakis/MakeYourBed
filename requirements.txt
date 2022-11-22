@@ -14,7 +14,7 @@ mkl-fft==1.1.0
 mkl-random==1.1.1
 mkl-service==2.3.0
 munch==2.5.0
-numpy==1.18.5
+numpy==1.22.0
 oauthlib==3.1.0
 pandas @ file:///C:/ci/pandas_1592833613419/work
 Pillow==9.3.0
